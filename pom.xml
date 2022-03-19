@@ -10,10 +10,10 @@
 		<relativePath />
 	</parent>
 	<groupId>com.exam</groupId>
-	<artifactId>examportal</artifactId>
+	<artifactId>sidhhguru</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>examportal</name>
-	<description>Backend application for exam portal</description>
+	<name>sidhhguru</name>
+	<description>Backend application for sidhhguru</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -22,18 +22,13 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-oauth2-client</artifactId>
-			<version>5.4.5</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -94,7 +89,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>Exam</finalName>
+		<finalName>SidhhGuru</finalName>
 	</build>
 
 </project>
