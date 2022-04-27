@@ -26,6 +26,4 @@ public class DatabaseSequence {
 	public void setSeq(long seq) {
 		this.seq = seq;
 	}
-
-    
 }

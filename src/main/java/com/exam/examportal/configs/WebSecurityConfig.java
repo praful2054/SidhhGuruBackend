@@ -29,49 +29,49 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	UserDetailsServiceImpl userDetailsService;
 	@Autowired
 	private AuthEntryPointJwt unauthorizedHandler;
+
 	@Bean
 	public AuthTokenFilter authenticationJwtTokenFilter() {
 		return new AuthTokenFilter();
 	}
+
 	@Override
 	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
 		authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
-	
+
 	@Bean
 	public ModelMapper modelMapper() {
-	    return new ModelMapper();
+		return new ModelMapper();
 	}
-	
+
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable()
-			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-			.authorizeRequests().antMatchers("/api/auth/**").permitAll()
-			.antMatchers("/api/test/**").permitAll()
-			.anyRequest().authenticated();
+		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+				.antMatchers("/api/auth/**").permitAll().antMatchers("/api/test/**").permitAll().anyRequest()
+				.authenticated();
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
-	
-	 @Override
-	    public void configure(WebSecurity web) throws Exception {
-	        web.ignoring().antMatchers("/v2/api-docs")//
-	                .antMatchers("/swagger-resources/**")//
-	                .antMatchers("/swagger-ui.html")//
-	                .antMatchers("/configuration/**")//
-	                .antMatchers("/webjars/**")//
-	                .antMatchers("/static/**")
-	                .antMatchers("/public/**")
-	                .and().ignoring().antMatchers("/h2-console/**/**");
-	    }
+
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/v2/api-docs")//
+				.antMatchers("/swagger-resources/**")//
+				.antMatchers("/swagger-ui.html")//
+				.antMatchers("/configuration/**")//
+				.antMatchers("/webjars/**")//
+				.antMatchers("/static/**").antMatchers("/public/**").and().ignoring().antMatchers("/h2-console/**/**");
+	}
 }
